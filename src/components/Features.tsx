@@ -3,85 +3,85 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 const FeaturesWrapper = styled.section`
-  padding: 4rem 0;
-  width: 100%;
+  padding: 8rem 0;
 `;
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
-  
-  @media (max-width: 968px) {
-    grid-template-columns: 1fr;
-  }
+  margin-top: 4rem;
 `;
 
 const FeatureCard = styled(motion.div)`
-  padding: 3rem 2rem;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  padding: 3rem;
   transition: transform 0.3s ease;
-
+  
   &:hover {
+    border-color: var(--color-primary);
     transform: translateY(-5px);
   }
 `;
 
 const IconWrapper = styled.div`
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 242, 254, 0.1);
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  color: #000;
-  box-shadow: 0 8px 16px -4px rgba(0, 242, 254, 0.3);
+  margin-bottom: 2rem;
+  color: var(--color-primary);
+  
+  svg {
+    width: 24px;
+    height: 24px;
+  }
 `;
 
-const CardTitle = styled.h4`
+const CardTitle = styled.h3`
   font-size: 1.5rem;
-  color: #fff;
-  margin: 0;
+  margin-bottom: 1rem;
 `;
 
 const CardText = styled.p`
   color: var(--color-text-dim);
-  font-size: 1rem;
   line-height: 1.6;
-  margin: 0;
 `;
 
 const features = [
   {
-    icon: "🤝",
-    title: "Peer-to-Peer",
-    text: "Directly exchange unused subscription seats with other professionals. No middlemen, just pure value."
+    title: "Zero-Knowledge Escrow",
+    text: "Trade compute capacity without ever exposing your private API keys or credentials.",
+    icon: <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
   },
   {
-    icon: "🛡️",
-    title: "Secure Escrow",
-    text: "Payments are held in escrow until seat access is verified. Your security is our top priority."
+    title: "Instant Liquidity",
+    text: "Convert unused monthly subscription value into spendable credits instantly.",
+    icon: <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
   },
   {
-    icon: "🌍",
-    title: "Global Access",
-    text: "Access premium AI tools from anywhere in the world, regardless of local billing restrictions."
+    title: "Global Scale",
+    text: "Access high-performance GPU clusters and premium AI models from any region.",
+    icon: <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>
   }
 ];
 
 export const Features: React.FC = () => (
   <FeaturesWrapper>
+    <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+      <h2 style={{ fontSize: '3.5rem', marginBottom: '1.5rem' }}>Engineered for Performance</h2>
+      <p style={{ color: 'var(--color-text-dim)', fontSize: '1.2rem', maxWidth: '600px', margin: '0 auto' }}>
+        The infrastructure that makes AI subscription secondary markets possible.
+      </p>
+    </div>
     <Grid>
       {features.map((feature, idx) => (
         <FeatureCard 
-          key={idx}
+          key={idx} 
           className="glass-panel"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: idx * 0.1 }}

@@ -24,6 +24,11 @@ const Badge = styled(motion.div)`
   margin-bottom: 2.5rem;
 `;
 
+const float = keyframes`
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+`;
+
 const Title = styled(motion.h2)`
   font-size: 7.5rem;
   line-height: 0.9;
@@ -34,6 +39,7 @@ const Title = styled(motion.h2)`
   -webkit-text-fill-color: transparent;
   font-weight: 800;
   letter-spacing: -0.06em;
+  animation: ${float} 6s ease-in-out infinite;
 
   @media (max-width: 1200px) {
     font-size: 6rem;
@@ -73,14 +79,14 @@ const TickerContainer = styled(motion.div)`
   display: flex;
   
   /* Fade edges */
-  mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
 `;
 
 const TickerTrack = styled.div`
   display: flex;
   width: max-content;
-  animation: ${scroll} 50s linear infinite;
+  animation: ${scroll} 60s linear infinite;
   
   &:hover {
     animation-play-state: paused;
@@ -91,29 +97,22 @@ const ModelItem = styled.div`
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.85rem 3rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: rgba(255, 255, 255, 0.4);
-  white-space: nowrap;
-  background: rgba(255, 255, 255, 0.02);
-  margin: 0 0.75rem;
-  border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0.85rem 2.5rem;
+  border-right: 1px solid var(--glass-border);
+  color: var(--color-text-dim);
+  font-weight: 500;
   transition: all 0.3s ease;
 
   &:hover {
     color: #fff;
     background: rgba(255, 255, 255, 0.05);
-    border-color: var(--glass-border);
-    transform: scale(1.05);
   }
 
-  span {
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
     color: var(--color-primary);
-    font-size: 1.2rem;
+    filter: drop-shadow(0 0 5px var(--color-primary));
   }
 `;
 
@@ -146,30 +145,22 @@ export const Hero: React.FC = () => (
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
     >
-      The world's first secondary market for premium AI subscription seats. 
-      Save 60%+ on the tools you use every day, secured by the Euler Protocol.
+      The primary marketplace for AI accounts and compute credits. 
+      Liquidate unused seats or find premium tools at a fraction of the cost.
     </SubTitle>
-    
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.4, duration: 0.8 }}
-      style={{ marginTop: '3rem' }}
-    >
-      <button onClick={() => document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })}>
-        Secure Early Access
-      </button>
-    </motion.div>
-    
+
     <TickerContainer
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ delay: 0.6, duration: 1 }}
+      transition={{ duration: 1, delay: 0.5 }}
     >
       <TickerTrack>
-        {[...models, ...models].map((model, idx) => (
-          <ModelItem key={idx}>
-            <span>✦</span> {model}
+        {[...models, ...models].map((model, i) => (
+          <ModelItem key={i}>
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+            </svg>
+            {model}
           </ModelItem>
         ))}
       </TickerTrack>
